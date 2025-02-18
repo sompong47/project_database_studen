@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>เพิ่มการลงทะเบียน - ระบบจัดการนักเรียน</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gradient-to-r from-blue-100 to-blue-300 font-sans">
+    <!-- Navbar -->
+    <nav class="bg-blue-600 text-white p-6 shadow-md">
+      <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-2xl font-extrabold">ระบบจัดการนักเรียน</h1>
+        <div class="space-x-6 text-lg">
+          <a
+            href="{% url 'index' %}"
+            class="hover:text-blue-200 transition-colors"
+            >Dashboard</a
+          >
+          <a
+            href="{% url 'student_list' %}"
+            class="hover:text-blue-200 transition-colors"
+            >จัดการนักเรียน</a
+          >
+          <a
+            href="{% url 'subject_list' %}"
+            class="hover:text-blue-200 transition-colors"
+            >จัดการวิชา</a
+          >
+          <a href="{% url 'enrollment_list' %}" class="font-bold text-blue-200"
+            >ลงทะเบียนเรียน</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mx-auto p-8">
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="text-3xl font-bold text-gray-800">เพิ่มการลงทะเบียน</h2>
+      </div>
+
+      <!-- Form for adding enrollment -->
+      <form method="POST">
+        {% csrf_token %}
+        <!-- You can add form fields here -->
+        <button
+          type="submit"
+          class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition duration-300 transform hover:scale-105"
+        >
+          บันทึกการลงทะเบียน
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

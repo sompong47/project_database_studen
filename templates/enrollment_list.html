@@ -1,0 +1,69 @@
+<!-- enrollment_list.html -->
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>รายการการลงทะเบียน - ระบบจัดการนักเรียน</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gradient-to-r from-blue-100 to-blue-300 font-sans">
+    <!-- Navbar -->
+    <nav class="bg-blue-600 text-white p-6 shadow-md">
+      <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-2xl font-extrabold">ระบบจัดการนักเรียน</h1>
+        <div class="space-x-6 text-lg">
+          <a href="{% url 'index' %}" class="hover:text-blue-200">Dashboard</a>
+          <a href="{% url 'student_list' %}" class="hover:text-blue-200"
+            >จัดการนักเรียน</a
+          >
+          <a href="{% url 'subject_list' %}" class="hover:text-blue-200"
+            >จัดการวิชา</a
+          >
+          <a href="{% url 'enrollment_list' %}" class="font-bold text-blue-200"
+            >ลงทะเบียนเรียน</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mx-auto p-8">
+      <h2 class="text-3xl font-bold text-gray-800 mb-8">
+        รายการการลงทะเบียนเรียน
+      </h2>
+
+      <!-- เพิ่มปุ่มเพื่อไปยังหน้าเพิ่มการลงทะเบียน -->
+      <a href="{% url 'enrollment_add' %}">
+        <button
+          class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700"
+        >
+          + เพิ่มการลงทะเบียน
+        </button>
+      </a>
+
+      <table
+        class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md mt-6"
+      >
+        <thead>
+          <tr>
+            <th class="px-6 py-3 border-b">นักเรียน</th>
+            <th class="px-6 py-3 border-b">วิชา</th>
+            <th class="px-6 py-3 border-b">วันที่ลงทะเบียน</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for enrollment in enrollments %}
+          <tr>
+            <td class="px-6 py-4 border-b">{{ enrollment.student.name }}</td>
+            <td class="px-6 py-4 border-b">{{ enrollment.subject.name }}</td>
+            <td class="px-6 py-4 border-b">{{ enrollment.enroll_date }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

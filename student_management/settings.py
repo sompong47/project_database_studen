@@ -56,7 +56,7 @@ ROOT_URLCONF = 'student_management.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [Path.joinpath(BASE_DIR, "templates")],
+        'DIRS': [BASE_DIR / "templates", BASE_DIR / "students/templates"],  # เพิ่ม path นี้
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +68,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'student_management.wsgi.application'
 

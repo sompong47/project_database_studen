@@ -1,0 +1,92 @@
+<!-- student_list.html -->
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>จัดการนักเรียน - ระบบจัดการนักเรียน</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gradient-to-r from-blue-100 to-blue-300 font-sans">
+    <!-- Navbar -->
+    <nav class="bg-blue-600 text-white p-6 shadow-md">
+      <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-2xl font-extrabold">ระบบจัดการนักเรียน</h1>
+        <div class="space-x-6 text-lg">
+          <a
+            href="{% url 'index' %}"
+            class="hover:text-blue-200 transition-colors"
+            >Dashboard</a
+          >
+          <a href="{% url 'student_list' %}" class="font-bold text-blue-200"
+            >จัดการนักเรียน</a
+          >
+          <a
+            href="{% url 'subject_list' %}"
+            class="hover:text-blue-200 transition-colors"
+            >จัดการวิชา</a
+          >
+          <a
+            href="{% url 'enrollment_list' %}"
+            class="hover:text-blue-200 transition-colors"
+            >ลงทะเบียนเรียน</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mx-auto p-8">
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="text-3xl font-bold text-gray-800">จัดการนักเรียน</h2>
+        <button
+          onclick="document.getElementById('form-section').classList.toggle('hidden')"
+          class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition duration-300 transform hover:scale-105"
+        >
+          + เพิ่มนักเรียน
+        </button>
+      </div>
+
+      <!-- ฟอร์มเพิ่มนักเรียน -->
+      <div id="form-section" class="bg-white rounded-lg shadow-md p-6 hidden">
+        <h3 class="text-2xl font-semibold text-gray-700">
+          เพิ่มข้อมูลนักเรียนใหม่
+        </h3>
+        <form method="POST" class="mt-6">
+          {% csrf_token %} {{ form.as_p }}
+          <button
+            type="submit"
+            class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition duration-300 transform hover:scale-105"
+          >
+            บันทึกข้อมูล
+          </button>
+        </form>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden mt-8">
+        <table class="w-full table-auto">
+          <thead class="bg-blue-600 text-white">
+            <tr>
+              <th class="px-6 py-3 text-left">ชื่อ</th>
+              <th class="px-6 py-3 text-left">อายุ</th>
+              <th class="px-6 py-3 text-left">ระดับชั้น</th>
+              <th class="px-6 py-3 text-left">อีเมล</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for student in students %}
+            <tr class="border-t">
+              <td class="px-6 py-4">{{ student.name }}</td>
+              <td class="px-6 py-4">{{ student.age }}</td>
+              <td class="px-6 py-4">{{ student.grade }}</td>
+              <td class="px-6 py-4">{{ student.email }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
